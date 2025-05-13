@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Course Management System</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1>Admin Dashboard</h1>
+      <div class="user-info">
+        <span id="user-name"></span>
+        <button id="logout-btn" class="btn btn-outline">Logout</button>
+      </div>
+    </header>
+    
+    <div class="dashboard-content">
+      <nav class="dashboard-nav">
+        <ul>
+          <li><a href="#" class="nav-link active" data-section="overview">Overview</a></li>
+          <li><a href="#" class="nav-link" data-section="users">Manage Users</a></li>
+          <li><a href="#" class="nav-link" data-section="courses">Manage Courses</a></li>
+          <li><a href="#" class="nav-link" data-section="analytics">Analytics</a></li>
+        </ul>
+      </nav>
+      
+      <main class="dashboard-main">
+        <!-- Overview Section -->
+        <section id="overview-section" class="dashboard-section active">
+          <h2>System Overview</h2>
+          <div class="stats-container">
+            <div class="stat-card">
+              <h3>Users</h3>
+              <div class="stat-value" id="total-users">-</div>
+              <div class="stat-details">
+                <div>Students: <span id="student-count">-</span></div>
+                <div>Teachers: <span id="teacher-count">-</span></div>
+                <div>Admins: <span id="admin-count">-</span></div>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <h3>Courses</h3>
+              <div class="stat-value" id="total-courses">-</div>
+              <div class="stat-details">
+                <div>Approved: <span id="approved-courses">-</span></div>
+                <div>Pending: <span id="pending-courses">-</span></div>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <h3>Assignments</h3>
+              <div class="stat-value" id="total-assignments">-</div>
+            </div>
+            
+            <div class="stat-card">
+              <h3>Submissions</h3>
+              <div class="stat-value" id="total-submissions">-</div>
+              <div class="stat-details">
+                <div>Graded: <span id="graded-submissions">-</span></div>
+                <div>Pending: <span id="pending-submissions">-</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Users Management Section -->
+        <section id="users-section" class="dashboard-section">
+          <h2>Manage Users</h2>
+          <div class="filter-controls">
+            <div class="form-group">
+              <label for="user-role-filter">Filter by Role:</label>
+              <select id="user-role-filter">
+                <option value="all">All Roles</option>
+                <option value="student">Students</option>
+                <option value="teacher">Teachers</option>
+                <option value="admin">Admins</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="users-table-body">
+                <tr>
+                  <td colspan="5" class="loading">Loading users...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        
+        <!-- Courses Management Section -->
+        <section id="courses-section" class="dashboard-section">
+          <h2>Manage Courses</h2>
+          <div class="filter-controls">
+            <div class="form-group">
+              <label for="course-status-filter">Filter by Status:</label>
+              <select id="course-status-filter">
+                <option value="all">All Courses</option>
+                <option value="approved">Approved</option>
+                <option value="pending">Pending Approval</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Teacher</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="courses-table-body">
+                <tr>
+                  <td colspan="5" class="loading">Loading courses...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        
+        <!-- Analytics Section -->
+        <section id="analytics-section" class="dashboard-section">
+          <h2>System Analytics</h2>
+          <div class="analytics-container">
+            <div class="chart-container">
+              <h3>User Distribution</h3>
+              <div class="chart" id="user-chart">
+                <div class="chart-placeholder">Chart will be displayed here</div>
+              </div>
+            </div>
+            
+            <div class="chart-container">
+              <h3>Course Status</h3>
+              <div class="chart" id="course-chart">
+                <div class="chart-placeholder">Chart will be displayed here</div>
+              </div>
+            </div>
+            
+            <div class="chart-container">
+              <h3>Submission Status</h3>
+              <div class="chart" id="submission-chart">
+                <div class="chart-placeholder">Chart will be displayed here</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  
+  <!-- Edit User Modal -->
+  <div id="edit-user-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Edit User</h2>
+      <form id="edit-user-form">
+        <input type="hidden" id="edit-user-id">
+        <div class="form-group">
+          <label for="edit-user-name">Name</label>
+          <input type="text" id="edit-user-name" disabled>
+        </div>
+        <div class="form-group">
+          <label for="edit-user-email">Email</label>
+          <input type="email" id="edit-user-email" disabled>
+        </div>
+        <div class="form-group">
+          <label for="edit-user-role">Role</label>
+          <select id="edit-user-role" required>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Update User</button>
+        </div>
+      </form>
+      <div class="danger-zone">
+        <h3>Danger Zone</h3>
+        <button id="delete-user-btn" class="btn btn-danger">Delete User</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Course Details Modal -->
+  <div id="course-details-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="course-details-title"></h2>
+      <p id="course-details-description"></p>
+      <div class="course-meta">
+        <div>Teacher: <span id="course-teacher"></span></div>
+        <div>Created: <span id="course-created"></span></div>
+      </div>
+      
+      <div class="approval-controls">
+        <h3>Approval Status</h3>
+        <div class="form-group">
+          <select id="course-approval-status">
+            <option value="true">Approved</option>
+            <option value="false">Not Approved</option>
+          </select>
+          <button id="update-approval-btn" class="btn btn-primary">Update Status</button>
+        </div>
+      </div>
+      
+      <h3>Course Materials</h3>
+      <div id="course-materials-list">
+        <p class="loading">Loading materials...</p>
+      </div>
+      
+      <div class="danger-zone">
+        <h3>Danger Zone</h3>
+        <button id="delete-course-btn" class="btn btn-danger">Delete Course</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/js/common.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

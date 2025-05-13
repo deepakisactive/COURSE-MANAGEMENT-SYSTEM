@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - Course Management System</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1>Student Dashboard</h1>
+      <div class="user-info">
+        <span id="user-name"></span>
+        <button id="logout-btn" class="btn btn-outline">Logout</button>
+      </div>
+    </header>
+    
+    <div class="dashboard-content">
+      <nav class="dashboard-nav">
+        <ul>
+          <li><a href="#" class="nav-link active" data-section="courses">My Courses</a></li>
+          <li><a href="#" class="nav-link" data-section="available-courses">Available Courses</a></li>
+          <li><a href="#" class="nav-link" data-section="assignments">Assignments</a></li>
+          <li><a href="#" class="nav-link" data-section="grades">Grades</a></li>
+        </ul>
+      </nav>
+      
+      <main class="dashboard-main">
+        <!-- My Courses Section -->
+        <section id="courses-section" class="dashboard-section active">
+          <h2>My Courses</h2>
+          <div id="my-courses-list" class="courses-grid">
+            <p class="loading">Loading your courses...</p>
+          </div>
+        </section>
+        
+        <!-- Available Courses Section -->
+        <section id="available-courses-section" class="dashboard-section">
+          <h2>Available Courses</h2>
+          <div id="available-courses-list" class="courses-grid">
+            <p class="loading">Loading available courses...</p>
+          </div>
+        </section>
+        
+        <!-- Assignments Section -->
+        <section id="assignments-section" class="dashboard-section">
+          <h2>Assignments</h2>
+          <div class="course-selector">
+            <label for="assignment-course-select">Select Course:</label>
+            <select id="assignment-course-select">
+              <option value="">Select a course</option>
+            </select>
+          </div>
+          <div id="assignments-list" class="assignments-list">
+            <p class="select-prompt">Please select a course to view assignments</p>
+          </div>
+        </section>
+        
+        <!-- Grades Section -->
+        <section id="grades-section" class="dashboard-section">
+          <h2>Grades & Feedback</h2>
+          <div id="grades-list" class="grades-list">
+            <p class="loading">Loading your grades...</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  
+  <!-- Assignment Submission Modal -->
+  <div id="submission-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Submit Assignment</h2>
+      <form id="submission-form">
+        <input type="hidden" id="assignment-id">
+        <div class="form-group">
+          <label for="submission-content">Your Answer:</label>
+          <textarea id="submission-content" name="content" rows="10" required></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit Assignment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Course Details Modal -->
+  <div id="course-details-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="course-details-title"></h2>
+      <p id="course-details-description"></p>
+      
+      <h3>Course Materials</h3>
+      <div id="course-materials-list">
+        <p class="loading">Loading materials...</p>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/js/common.js"></script>
+  <script src="/js/student.js"></script>
+</body>
+</html>
